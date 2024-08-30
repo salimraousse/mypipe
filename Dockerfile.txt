@@ -1,8 +1,9 @@
-FROM nginx:alpine
-RUN rm -rf /usr/share/nginx/html/*
-# Copy your custom HTML file to the Nginx directory
-COPY index.html /usr/share/nginx/html/
-# Expose port 80
-EXPOSE 80
-# Start Nginx
-CMD ["nginx", "-g", "daemon off;"]
+FROM python
+WORKDIR /app
+COPY ./requirements.txt /app
+RUN pip3 install -r requirements.txt
+COPY . /app
+EXPOSE 5000
+ENV FLASK_APP=my_flask.py
+CMD ["flask", "run", "--host=0.0.0.0"]
+

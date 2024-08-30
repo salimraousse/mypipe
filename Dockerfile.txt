@@ -1,8 +1,8 @@
-FROM nginx:latest
-MAINTAINER swapsstyle
-
-RUN apt-get update -y &&\
-    apt-get install nano -y
-COPY ./index.html ./usr/share/nginx/html
-
+FROM nginx:alpine
+RUN rm -rf /usr/share/nginx/html/*
+# Copy your custom HTML file to the Nginx directory
+COPY index.html /usr/share/nginx/html/
+# Expose port 80
 EXPOSE 80
+# Start Nginx
+CMD ["nginx", "-g", "daemon off;"]

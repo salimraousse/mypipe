@@ -1,0 +1,20 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: mypipe-img-deployment 
+  namespace: craftman
+spec:
+  selector:
+    matchLabels:
+      app: mypipe
+  replicas: 4
+  template:
+    metadata:
+      labels:
+        app: mypipe
+    spec:
+      containers:
+      - name: mypipe
+        image: salimraousse/mypipe:latest
+        ports:
+        - containerPort: 5000
